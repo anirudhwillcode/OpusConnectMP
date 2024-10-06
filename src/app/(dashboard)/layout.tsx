@@ -104,7 +104,7 @@ export default function DashboardLayout({
         {/* Add other sidebar content here */}
       </div>
       {/*right*/}
-      <div className='w-[86%] md:w-[92%] lg:w-[84%] xl:w-[86%] bg-gray-100 overflow-scroll'>
+      <div className='w-[86%] md:w-[92%] lg:w-[84%] xl:w-[86%] bg-gray-200 overflow-scroll'>
          <Navbar/> 
         {children}
       </div>

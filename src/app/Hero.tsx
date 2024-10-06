@@ -1,4 +1,4 @@
-"use client";
+"use client"; 
 
 import React, { useState, useEffect } from "react";
 import { World, GlobeConfig } from "@/components/ui/globe";
@@ -129,22 +129,13 @@ export default function Page() {
             <Link href="/admin" className="hover:text-gray-300 transition-colors">
               Admin
             </Link>
-            <Link
-              href="/about"
-              className="hover:text-gray-300 transition-colors"
-            >
+            <Link href="/about" className="hover:text-gray-300 transition-colors">
               About
             </Link>
-            <Link
-              href="/services"
-              className="hover:text-gray-300 transition-colors"
-            >
+            <Link href="/services" className="hover:text-gray-300 transition-colors">
               Services
             </Link>
-            <Link
-              href="/contact"
-              className="hover:text-gray-300 transition-colors"
-            >
+            <Link href="/contact" className="hover:text-gray-300 transition-colors">
               Contact
             </Link>
           </div>
@@ -166,28 +157,16 @@ export default function Page() {
         {isMenuOpen && (
           <div className="mt-4 md:hidden">
             <div className="flex flex-col space-y-2">
-              <Link
-                href="/admin"
-                className="hover:text-gray-300 transition-colors"
-              >
+              <Link href="/admin" className="hover:text-gray-300 transition-colors">
                 Home
               </Link>
-              <Link
-                href="/about"
-                className="hover:text-gray-300 transition-colors"
-              >
+              <Link href="/about" className="hover:text-gray-300 transition-colors">
                 About
               </Link>
-              <Link
-                href="/services"
-                className="hover:text-gray-300 transition-colors"
-              >
+              <Link href="/services" className="hover:text-gray-300 transition-colors">
                 Services
               </Link>
-              <Link
-                href="/contact"
-                className="hover:text-gray-300 transition-colors"
-              >
+              <Link href="/contact" className="hover:text-gray-300 transition-colors">
                 Contact
               </Link>
             </div>
@@ -203,17 +182,28 @@ export default function Page() {
         <Logo />
         <div className="relative z-10 text-center text-white px-4 md:px-0">
           <h1 className="text-4xl md:text-6xl font-bold mb-4 leading-tight">
-            We sell soap worldwide
+            Connecting Talent, Empowering Opportunities
           </h1>
           <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto">
-            This globe is interactive and customizable. Have fun with it, and
-            don't forget to share it. :)
+            OpusConnect is your gateway to a thriving professional network, where students, alumni, and companies come together to create a future full of opportunities.
           </p>
+          {/* Login and Sign Up Buttons */}
+          <div className="flex justify-center space-x-4">
+  <Link href="/login">
+    <Button className="text-white bg-gray-800 hover:bg-gray-700 rounded-lg py-2 px-6 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg">
+      Login
+    </Button>
+  </Link>
+  <Link href="/signup">
+    <Button className="text-white bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 rounded-lg py-2 px-6 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg">
+      Sign Up
+    </Button>
+  </Link>
+</div>
         </div>
       </div>
 
       {/* Footer */}
-     
     </div>
   );
 }
