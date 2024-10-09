@@ -1,10 +1,8 @@
-"use client"; 
-
+'use client';
 import React, { useState, useEffect } from "react";
-import { World, GlobeConfig } from "@/components/ui/globe";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
-import Button from "@/components/Button";
+import { Menu, X } from "lucide-react"; // Assuming you're using lucide-react for icons
+import Button from "@/components/Button"; // Assuming you have a Button component
 
 function Logo() {
   const [animate, setAnimate] = useState(false);
@@ -17,7 +15,7 @@ function Logo() {
   return (
     <svg
       viewBox="0 0 100 100"
-      className="h-8 w-8 text-white flex-shrink-0"
+      className="h-8 w-8 text-primary flex-shrink-0"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
@@ -80,44 +78,13 @@ function Logo() {
   );
 }
 
-export default function Page() {
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-
-  const globeConfig: GlobeConfig = {
-    globeColor: "#000080", // Deep blue color
-    atmosphereColor: "#ffffff",
-    ambientLight: "#ffffff",
-    directionalLeftLight: "#ffffff",
-    directionalTopLight: "#ffffff",
-    pointLight: "#ffffff",
-    arcTime: 1500,
-    arcLength: 0.8,
-    rings: 2,
-    maxRings: 5,
-    initialPosition: {
-      lat: 0,
-      lng: 0,
-    },
-    autoRotate: true,
-    autoRotateSpeed: 0.6,
-  };
-
-  const arcData = [
-    {
-      order: 1,
-      startLat: 37.7749,
-      startLng: -122.4194,
-      endLat: 51.5074,
-      endLng: -0.1278,
-      arcAlt: 0.4,
-      color: "#ffffff",
-    },
-  ];
+const MainNavbar = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-black flex flex-col">
+    <div className="h-[30px] bg-black flex flex-col">
       {/* OpusConnect Navbar */}
-      <nav className="bg-black text-white py-4 px-6 md:px-12">
+      <nav className="bg-white text-black py-4 px-6 md:px-12">
         <div className="flex justify-between items-center">
           <div className="flex items-center space-x-3">
             <Logo /> {/* Place Logo Here */}
@@ -173,37 +140,8 @@ export default function Page() {
           </div>
         )}
       </nav>
-
-      {/* Hero Section with Globe */}
-      <div className="flex-grow flex flex-col items-center justify-center relative overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <World globeConfig={globeConfig} data={arcData} />
-        </div>
-        <Logo />
-        <div className="relative z-10 text-center text-white px-4 md:px-0">
-          <h1 className="text-4xl md:text-6xl font-bold mb-4 leading-tight">
-            Connecting Talent, Empowering Opportunities
-          </h1>
-          <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto">
-            OpusConnect is your gateway to a thriving professional network, where students, alumni, and companies come together to create a future full of opportunities.
-          </p>
-          {/* Login and Sign Up Buttons */}
-          <div className="flex justify-center space-x-4">
-  <Link href="/login">
-    <Button className="text-white bg-gray-800 hover:bg-gray-700 rounded-lg py-2 px-6 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg">
-      Login
-    </Button>
-  </Link>
-  <Link href="/signup">
-    <Button className="text-white bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 rounded-lg py-2 px-6 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg">
-      Sign Up
-    </Button>
-  </Link>
-</div>
-        </div>
-      </div>
-
-      {/* Footer */}
     </div>
   );
-}
+};
+
+export default MainNavbar;
