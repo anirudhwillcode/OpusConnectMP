@@ -14,32 +14,14 @@ const menuItems = [
       {
         icon: "/teacher.png",
         label: "Jobs",
-        href: "/list/",
+        href: "/student",
         visible: ["admin", "student"],
       },
       {
         icon: "/student.png",
         label: "CareerGuide",
-        href: "/list/students",
+        href: "/careerGuide",
         visible: ["admin", "student"  ],
-      },
-      {
-        icon: "/parent.png",
-        label: "Post Jobs",
-        href: "/list/parents",
-        visible: ["admin", "company"],
-      },
-      {
-        icon: "/subject.png",
-        label: "View Applications",
-        href: "/list/subjects",
-        visible: ["admin", "company"],
-      },
-      {
-        icon: "/class.png",
-        label: "Shortlist",
-        href: "/list/classes",
-        visible: ["admin", "company"],
       },
       {
         icon: "/lesson.png",
