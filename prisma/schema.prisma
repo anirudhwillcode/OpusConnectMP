@@ -1,0 +1,198 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+//******************************************//
+
+model Admin {
+  id String @id
+  username String @unique
+}
+
+//******************************************//
+
+model POfficer {
+  id String @id
+  username String @unique
+  name String
+  email String?
+  phone String?
+}
+
+//******************************************//
+
+model Company {
+  id String @id
+  username String @unique
+  name String
+  email String?
+  phone String?
+
+  jobs Job[]  // Opposite relation for jobs posted by company
+  feedbacks Feedback[] // Opposite relation for feedbacks received
+}
+
+//******************************************//
+
+// STUDENT DETAILS HERE
+
+model Student {
+  id         String    @id
+  username   String    @unique
+  name       String
+  email      String?
+  phone      String?
+  address    String
+  img        String?   // Profile image
+  sex        UserSex
+  usn        String    @unique
+  department Dept
+  cgpa       Float     // Single CGPA field
+  resume     String?   // URL to resume file provided by the student
+  internships Internship[] // List of internships
+  achievements Achievement[] // List of achievements
+  certificates Certificate[] // List of certificates
+
+  createdAt DateTime @default(now())
+
+  students    StudentJob[]  // Relation to track jobs the student has applied to
+  placements  PlacedStudents[] // Opposite relation for placed students
+  feedbacks   Feedback[]  // Opposite relation for feedbacks given
+}
+
+// Model to represent internships
+model Internship {
+  id        String  @id @default(cuid())
+  company   String
+  position  String
+  duration  String  // e.g., "3 months"
+  details   String  // Details of the work done
+
+  studentId String
+  student   Student @relation(fields: [studentId], references: [id])
+}
+
+// Model to represent achievements
+model Achievement {
+  id        String  @id @default(cuid())
+  title     String
+  description String
+  date      DateTime
+
+  studentId String
+  student   Student @relation(fields: [studentId], references: [id])
+}
+
+// Model to represent certificates
+model Certificate {
+  id        String  @id @default(cuid())
+  title     String
+  issuer    String
+  date      DateTime
+  img       String  // URL to the certificate image
+
+  studentId String  @unique // Ensure studentId is unique for a one-to-one relation
+  student   Student @relation(fields: [studentId], references: [id])
+}
+
+//******************************************//
+
+model Announcement {
+  id        String @id @default(cuid())
+  title     String
+  content   String
+  date      DateTime @default(now())
+
+  pdfFileUrl String? // URL to the PDF file with more details (optional)
+}
+
+//******************************************//
+
+model Job {
+  id          String  @id @default(cuid())
+  title       String  // Job title
+  description String  // Job description
+  url         String  // URL to apply
+  companyId   String  // Foreign key to Company
+  company     Company @relation(fields: [companyId], references: [id])
+
+  pdfFileUrl  String? // URL to the PDF file with detailed job description (optional)
+
+  students    StudentJob[]  // Relation to track students applying to this job
+  placements  PlacedStudents[] // Opposite relation for placed students
+}
+
+// Join table to track students applied for jobs
+model StudentJob {
+  id        String  @id @default(cuid())
+  jobId     String  // Foreign key to Job
+  studentId String  // Foreign key to Student
+
+  job       Job     @relation(fields: [jobId], references: [id])
+  student   Student @relation(fields: [studentId], references: [id])
+
+  appliedAt DateTime @default(now())  // Timestamp for when the student applied
+}
+
+//******************************************//
+
+model Resorce {
+  id       String @id @default(cuid())
+  title    String
+  url      String // URL to the resource
+}
+
+//******************************************//
+
+model PlacedStudents {
+  id        String @id @default(cuid())
+  studentId String // Foreign key to Student
+  jobId     String  // Foreign key to Job
+  placementDate DateTime @default(now())
+
+  student      Student @relation(fields: [studentId], references: [id])
+  job          Job     @relation(fields: [jobId], references: [id])
+}
+
+//******************************************//
+
+enum UserSex {
+  MALE
+  FEMALE
+}
+
+enum Dept {
+  CSE
+  ISE
+  CIVIL
+  MECH
+  ECE
+  ETE
+  EEE
+  IEM
+  TCE
+}
+
+//******************************************//
+
+model Feedback {
+  id        String @id @default(cuid())
+  studentId String // Foreign key to Student
+  companyId String // Foreign key to Company
+  feedback  String // Feedback content
+  date      DateTime @default(now()) // Date of feedback
+
+  student   Student @relation(fields: [studentId], references: [id])
+  company   Company @relation(fields: [companyId], references: [id])
+}
